@@ -35,6 +35,18 @@ public class DataDriven {
                     k++;
                 }
                 System.out.println(column);
+
+                while (rows.hasNext()) {
+                    Row r = rows.next();
+                    if(r.getCell(column).getStringCellValue().equalsIgnoreCase("Purchase")) {
+                        Iterator<Cell> cv = r.cellIterator();
+                        while (cv.hasNext()) {
+
+                            System.out.println(cv.next().getStringCellValue());
+
+                        }
+                    }
+                }
             }
         }
     }
