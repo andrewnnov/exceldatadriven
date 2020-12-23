@@ -4,13 +4,20 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DataDriven {
 
     public static void main(String[] args) throws IOException {
+
+
+    }
+
+
+    public ArrayList<String> getData(String testCaseName) throws IOException {
+        ArrayList<String> arrayList = new ArrayList<String>();
 
         FileInputStream fileInputStream = new FileInputStream("C:\\java\\excel\\datademo.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
@@ -38,16 +45,18 @@ public class DataDriven {
 
                 while (rows.hasNext()) {
                     Row r = rows.next();
-                    if(r.getCell(column).getStringCellValue().equalsIgnoreCase("Purchase")) {
+                    if(r.getCell(column).getStringCellValue().equalsIgnoreCase(testCaseName)) {
                         Iterator<Cell> cv = r.cellIterator();
                         while (cv.hasNext()) {
-
-                            System.out.println(cv.next().getStringCellValue());
+                            arrayList.add(cv.next().getStringCellValue());
 
                         }
                     }
                 }
             }
         }
+
+        return arrayList;
+
     }
 }
